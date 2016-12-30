@@ -1,0 +1,1072 @@
+Assuming the OS is: linux
+Starting unix-privesc-check v1.4 ( http://pentestmonkey.net/tools/unix-privesc-check )
+
+This script checks file permissions and other settings that could allow
+local users to escalate privileges.
+
+Use of this script is only permitted on systems which you have been granted
+legal permission to perform a security assessment of.  Apart from this 
+condition the GPL v2 applies.
+
+Search the output below for the word 'WARNING'.  If you don't see it then
+this script didn't find any problems.
+
+
+############################################
+Recording hostname
+############################################
+localhost.localdomain
+
+############################################
+Recording uname
+############################################
+Linux localhost.localdomain 3.10.0-327.10.1.el7.x86_64 #1 SMP Tue Feb 16 17:03:50 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
+
+############################################
+Recording Interface IP addresses
+############################################
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fe2e:9971  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:2e:99:71  txqueuelen 1000  (Ethernet)
+        RX packets 12281  bytes 15130097 (14.4 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 10248  bytes 733474 (716.2 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 0  (Local Loopback)
+        RX packets 132837  bytes 21065528 (20.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 132837  bytes 21065528 (20.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+
+############################################
+Checking if external authentication is allowed in /etc/passwd
+############################################
+No +:... line found in /etc/passwd
+
+############################################
+Checking nsswitch.conf for addition authentication methods
+############################################
+Neither LDAP nor NIS are used for authentication
+
+############################################
+Checking for writable config files
+############################################
+    Checking if anyone except root can change /etc/passwd
+    Checking if anyone except root can change /etc/group
+    Checking if anyone except root can change /etc/inittab
+    Checking if anyone except root can change /etc/xinetd.d/xproftpd
+    Checking if anyone except root can change /etc/fstab
+    Checking if anyone except root can change /etc/profile
+    Checking if anyone except root can change /etc/sudoers
+    Checking if anyone except root can change /etc/shadow
+
+############################################
+Checking if /etc/shadow is readable
+############################################
+    Checking if anyone except root can read file /etc/shadow
+
+############################################
+Checking for password hashes in /etc/passwd
+############################################
+No password hashes found in /etc/passwd
+
+############################################
+Checking account settings
+############################################
+Checking for accounts with no passwords
+
+############################################
+Checking library directories from /etc/ld.so.conf
+############################################
+
+############################################
+Checking sudo configuration
+############################################
+-----------------
+Checking if sudo is configured
+WARNING: Sudo is configured.  Manually check nothing unsafe is allowed:
+root	ALL=(ALL) 	ALL
+%wheel	ALL=(ALL)	ALL
+-----------------
+Checking sudo users need a password
+
+############################################
+Checking permissions on swap file(s)
+############################################
+    Checking if anyone except root can change /dev/dm-1
+    Checking if anyone except root can read file /dev/dm-1
+
+############################################
+Checking programs run from inittab
+############################################
+
+############################################
+Checking postgres trust relationships
+############################################
+No postgres trusts detected
+
+############################################
+Checking permissions on device files for mounted partitions
+############################################
+
+############################################
+Checking cron job programs aren't writable (/etc/crontab)
+############################################
+Crontab path is /sbin:/bin:/usr/sbin:/usr/bin
+
+############################################
+Checking cron job programs aren't writable (/var/spool/cron/crontabs)
+############################################
+Directory /var/spool/cron/crontabs is not present.  Skipping checks.
+
+############################################
+Checking cron job programs aren't writable (/var/spool/cron/tabs)
+############################################
+Directory /var/spool/cron/tabs is not present.  Skipping checks.
+
+############################################
+Checking inetd programs aren't writable
+############################################
+File /etc/inetd.conf not present.  Skipping checks.
+
+############################################
+Checking xinetd programs aren't writeable
+############################################
+
+############################################
+Checking home directories aren't writable
+############################################
+Processing /etc/passwd line: root:x:0:0:root:/root:/bin/bash
+    Checking if anyone except root can change /root
+Processing /etc/passwd line: bin:x:1:1:bin:/bin:/sbin/nologin
+    Skipping user bin.  They don't have a shell.
+Processing /etc/passwd line: daemon:x:2:2:daemon:/sbin:/sbin/nologin
+    Skipping user daemon.  They don't have a shell.
+Processing /etc/passwd line: adm:x:3:4:adm:/var/adm:/sbin/nologin
+    Skipping user adm.  They don't have a shell.
+Processing /etc/passwd line: lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+    Skipping user lp.  They don't have a shell.
+Processing /etc/passwd line: sync:x:5:0:sync:/sbin:/bin/sync
+    Checking if anyone except sync can change /sbin
+Processing /etc/passwd line: shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+    Checking if anyone except shutdown can change /sbin
+Processing /etc/passwd line: halt:x:7:0:halt:/sbin:/sbin/halt
+    Checking if anyone except halt can change /sbin
+Processing /etc/passwd line: mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+    Skipping user mail.  They don't have a shell.
+Processing /etc/passwd line: operator:x:11:0:operator:/root:/sbin/nologin
+    Skipping user operator.  They don't have a shell.
+Processing /etc/passwd line: games:x:12:100:games:/usr/games:/sbin/nologin
+    Skipping user games.  They don't have a shell.
+Processing /etc/passwd line: ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+    Skipping user ftp.  They don't have a shell.
+Processing /etc/passwd line: nobody:x:99:99:Nobody:/:/sbin/nologin
+    Skipping user nobody.  They don't have a shell.
+Processing /etc/passwd line: avahi-autoipd:x:170:170:Avahi IPv4LL Stack:/var/lib/avahi-autoipd:/sbin/nologin
+    Skipping user avahi-autoipd.  They don't have a shell.
+Processing /etc/passwd line: systemd-bus-proxy:x:999:997:systemd Bus Proxy:/:/sbin/nologin
+    Skipping user systemd-bus-proxy.  They don't have a shell.
+Processing /etc/passwd line: systemd-network:x:998:996:systemd Network Management:/:/sbin/nologin
+    Skipping user systemd-network.  They don't have a shell.
+Processing /etc/passwd line: dbus:x:81:81:System message bus:/:/sbin/nologin
+    Skipping user dbus.  They don't have a shell.
+Processing /etc/passwd line: polkitd:x:997:995:User for polkitd:/:/sbin/nologin
+    Skipping user polkitd.  They don't have a shell.
+Processing /etc/passwd line: abrt:x:173:173::/etc/abrt:/sbin/nologin
+    Skipping user abrt.  They don't have a shell.
+Processing /etc/passwd line: colord:x:996:994:User for colord:/var/lib/colord:/sbin/nologin
+    Skipping user colord.  They don't have a shell.
+Processing /etc/passwd line: libstoragemgmt:x:995:992:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+    Skipping user libstoragemgmt.  They don't have a shell.
+Processing /etc/passwd line: setroubleshoot:x:994:991::/var/lib/setroubleshoot:/sbin/nologin
+    Skipping user setroubleshoot.  They don't have a shell.
+Processing /etc/passwd line: rpc:x:32:32:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+    Skipping user rpc.  They don't have a shell.
+Processing /etc/passwd line: rtkit:x:172:172:RealtimeKit:/proc:/sbin/nologin
+    Skipping user rtkit.  They don't have a shell.
+Processing /etc/passwd line: chrony:x:993:990::/var/lib/chrony:/sbin/nologin
+    Skipping user chrony.  They don't have a shell.
+Processing /etc/passwd line: tss:x:59:59:Account used by the trousers package to sandbox the tcsd daemon:/dev/null:/sbin/nologin
+    Skipping user tss.  They don't have a shell.
+Processing /etc/passwd line: geoclue:x:992:989:User for geoclue:/var/lib/geoclue:/sbin/nologin
+    Skipping user geoclue.  They don't have a shell.
+Processing /etc/passwd line: usbmuxd:x:113:113:usbmuxd user:/:/sbin/nologin
+    Skipping user usbmuxd.  They don't have a shell.
+Processing /etc/passwd line: ntp:x:38:38::/etc/ntp:/sbin/nologin
+    Skipping user ntp.  They don't have a shell.
+Processing /etc/passwd line: mysql:x:27:27:MariaDB Server:/var/lib/mysql:/sbin/nologin
+    Skipping user mysql.  They don't have a shell.
+Processing /etc/passwd line: rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/sbin/nologin
+    Skipping user rpcuser.  They don't have a shell.
+Processing /etc/passwd line: nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/nologin
+    Skipping user nfsnobody.  They don't have a shell.
+Processing /etc/passwd line: sssd:x:991:988:User for sssd:/:/sbin/nologin
+    Skipping user sssd.  They don't have a shell.
+Processing /etc/passwd line: pulse:x:171:171:PulseAudio System Daemon:/var/run/pulse:/sbin/nologin
+    Skipping user pulse.  They don't have a shell.
+Processing /etc/passwd line: gdm:x:42:42::/var/lib/gdm:/sbin/nologin
+    Skipping user gdm.  They don't have a shell.
+Processing /etc/passwd line: postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+    Skipping user postfix.  They don't have a shell.
+Processing /etc/passwd line: sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+    Skipping user sshd.  They don't have a shell.
+Processing /etc/passwd line: tcpdump:x:72:72::/:/sbin/nologin
+    Skipping user tcpdump.  They don't have a shell.
+Processing /etc/passwd line: bob:x:1000:1000:bob:/home/bob:/bin/bash
+    Checking if anyone except bob can change /home/bob
+Processing /etc/passwd line: vboxadd:x:990:1::/var/run/vboxadd:/bin/false
+    Skipping user vboxadd.  They don't have a shell.
+Processing /etc/passwd line: elasticsearch:x:989:984:elasticsearch user:/home/elasticsearch:/sbin/nologin
+    Skipping user elasticsearch.  They don't have a shell.
+Processing /etc/passwd line: kibana:x:988:983::/home/kibana:/bin/bash
+    Checking if anyone except kibana can change /home/kibana
+Processing /etc/passwd line: nginx:x:987:982:Nginx web server:/var/lib/nginx:/sbin/nologin
+    Skipping user nginx.  They don't have a shell.
+Processing /etc/passwd line: logstash:x:986:981:logstash:/opt/logstash:/sbin/nologin
+    Skipping user logstash.  They don't have a shell.
+
+############################################
+Checking for readable sensitive files in home directories
+############################################
+    Checking if anyone except root can read file /root/.bash_history
+WARNING: /root/.bash_history is in the home directory of root. The group root can read /root/.bash_history
+    Checking if anyone except operator can read file /root/.bash_history
+WARNING: /root/.bash_history is in the home directory of operator. The group root can read /root/.bash_history
+    Checking if anyone except bob can read file /home/bob/.bash_history
+
+############################################
+Checking SUID programs
+############################################
+Skipping checks of SUID programs (it's slow!).  Run again in 'detailed' mode.
+
+############################################
+Checking for Private SSH Keys home directories
+############################################
+
+############################################
+Checking for Public SSH Keys home directories
+############################################
+
+############################################
+Checking for SSH agents
+############################################
+WARNING: There are SSH agents running on this system:
+bob       2980  2834  0 19:23 ?        00:00:00 /usr/bin/ssh-agent /bin/sh -c exec -l /bin/bash -c "/usr/bin/startkde"
+
+############################################
+Checking for GPG agents
+############################################
+No GPG agents found
+
+############################################
+Checking startup files (init.d / rc.d) aren't writable
+############################################
+Processing startup script /etc/init.d/elasticsearch
+    Checking if anyone except root can change /etc/init.d/elasticsearch
+Processing startup script /etc/init.d/functions
+    Checking if anyone except root can change /etc/init.d/functions
+Processing startup script /etc/init.d/jexec
+    Checking if anyone except root can change /etc/init.d/jexec
+Processing startup script /etc/init.d/kibana
+    Checking if anyone except root can change /etc/init.d/kibana
+Processing startup script /etc/init.d/logstash
+    Checking if anyone except root can change /etc/init.d/logstash
+WARNING: /etc/init.d/logstash is run by root at startup. The group root can write to /etc/init.d/logstash
+Processing startup script /etc/init.d/netconsole
+    Checking if anyone except root can change /etc/init.d/netconsole
+Processing startup script /etc/init.d/network
+    Checking if anyone except root can change /etc/init.d/network
+Processing startup script /etc/init.d/README
+    Checking if anyone except root can change /etc/init.d/README
+Processing startup script /etc/rc.d/init.d
+    Checking if anyone except root can change /etc/rc.d/init.d
+Processing startup script /etc/rc.d/rc0.d
+    Checking if anyone except root can change /etc/rc.d/rc0.d
+Processing startup script /etc/rc.d/rc1.d
+    Checking if anyone except root can change /etc/rc.d/rc1.d
+Processing startup script /etc/rc.d/rc2.d
+    Checking if anyone except root can change /etc/rc.d/rc2.d
+Processing startup script /etc/rc.d/rc3.d
+    Checking if anyone except root can change /etc/rc.d/rc3.d
+Processing startup script /etc/rc.d/rc4.d
+    Checking if anyone except root can change /etc/rc.d/rc4.d
+Processing startup script /etc/rc.d/rc5.d
+    Checking if anyone except root can change /etc/rc.d/rc5.d
+Processing startup script /etc/rc.d/rc6.d
+    Checking if anyone except root can change /etc/rc.d/rc6.d
+Processing startup script /etc/rc.d/rc.local
+    Checking if anyone except root can change /etc/rc.d/rc.local
+
+############################################
+Checking if running programs are writable
+############################################
+------------------------
+PID:           1
+Owner:         root
+Program path:  /usr/lib/systemd/systemd
+    Checking if anyone except root can change /usr/lib/systemd/systemd
+------------------------
+PID:           10
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           11
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           12
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           13
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           1342
+Owner:         root
+Program path:  /usr/bin/python2.7
+    Checking if anyone except root can change /usr/bin/python2.7
+------------------------
+PID:           1345
+Owner:         root
+Program path:  /usr/sbin/cupsd
+    Checking if anyone except root can change /usr/sbin/cupsd
+------------------------
+PID:           1348
+Owner:         root
+Program path:  /usr/sbin/sshd
+    Checking if anyone except root can change /usr/sbin/sshd
+------------------------
+PID:           1353
+Owner:         elasticsearch
+Program path:  /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64/jre/bin/java
+    Checking if anyone except elasticsearch can change /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64/jre/bin/java
+------------------------
+PID:           1388
+Owner:         logstash
+Program path:  /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64/jre/bin/java
+    Checking if anyone except logstash can change /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64/jre/bin/java
+------------------------
+PID:           14
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           1455
+Owner:         nobody
+Program path:  /usr/sbin/proftpd
+    Checking if anyone except nobody can change /usr/sbin/proftpd
+------------------------
+PID:           1466
+Owner:         root
+Program path:  /usr/sbin/crond
+    Checking if anyone except root can change /usr/sbin/crond
+------------------------
+PID:           1491
+Owner:         root
+Program path:  /usr/sbin/gdm
+    Checking if anyone except root can change /usr/sbin/gdm
+------------------------
+PID:           1496
+Owner:         root
+Program path:  /usr/sbin/atd
+    Checking if anyone except root can change /usr/sbin/atd
+------------------------
+PID:           15
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           1556
+Owner:         root
+Program path:  /usr/bin/Xorg
+    Checking if anyone except root can change /usr/bin/Xorg
+------------------------
+PID:           1561
+Owner:         root
+Program path:  /usr/sbin/nginx
+    Checking if anyone except root can change /usr/sbin/nginx
+------------------------
+PID:           1562
+Owner:         nginx
+Program path:  /usr/sbin/nginx
+    Checking if anyone except nginx can change /usr/sbin/nginx
+------------------------
+PID:           16
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           17
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           17480
+Owner:         root
+Program path:  /usr/bin/sudo
+    Checking if anyone except root can change /usr/bin/sudo
+------------------------
+PID:           17481
+Owner:         root
+Program path:  /usr/bin/bash
+    Checking if anyone except root can change /usr/bin/bash
+------------------------
+PID:           18
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           19
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           1962
+Owner:         root
+Program path:  /usr/libexec/postfix/master
+    Checking if anyone except root can change /usr/libexec/postfix/master
+------------------------
+PID:           1970
+Owner:         postfix
+Program path:  /usr/libexec/postfix/qmgr
+    Checking if anyone except postfix can change /usr/libexec/postfix/qmgr
+------------------------
+PID:           2
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           20
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           21
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           2335
+Owner:         root
+Program path:  /usr/libexec/upowerd
+    Checking if anyone except root can change /usr/libexec/upowerd
+------------------------
+PID:           26
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           262
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           27
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           277
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           278
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           28
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           280
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           2800
+Owner:         root
+Program path:  /usr/libexec/gdm-session-worker
+    Checking if anyone except root can change /usr/libexec/gdm-session-worker
+------------------------
+PID:           281
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           283
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           2834
+Owner:         bob
+Program path:  /usr/bin/bash
+    Checking if anyone except bob can change /usr/bin/bash
+------------------------
+PID:           284
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           2841
+Owner:         bob
+Program path:  /usr/bin/dbus-launch
+    Checking if anyone except bob can change /usr/bin/dbus-launch
+------------------------
+PID:           2842
+Owner:         bob
+Program path:  /usr/bin/dbus-daemon
+    Checking if anyone except bob can change /usr/bin/dbus-daemon
+------------------------
+PID:           285
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           29
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           2908
+Owner:         bob
+Program path:  /usr/libexec/imsettings-daemon
+    Checking if anyone except bob can change /usr/libexec/imsettings-daemon
+------------------------
+PID:           2946
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2947
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2957
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2960
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2961
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2965
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2967
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2971
+Owner:         bob
+Program path:  /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+    Checking if anyone except bob can change /opt/VBoxGuestAdditions-5.0.14/bin/VBoxClient
+------------------------
+PID:           2980
+Owner:         bob
+Program path:  /usr/bin/ssh-agent
+    Checking if anyone except bob can change /usr/bin/ssh-agent
+------------------------
+PID:           3
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           30
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           3037
+Owner:         bob
+Program path:  /usr/libexec/kde4/start_kdeinit
+    Checking if anyone except bob can change /usr/libexec/kde4/start_kdeinit
+------------------------
+PID:           3038
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3039
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3041
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3043
+Owner:         bob
+Program path:  /usr/libexec/gam_server
+    Checking if anyone except bob can change /usr/libexec/gam_server
+------------------------
+PID:           3047
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3052
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           3054
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3059
+Owner:         bob
+Program path:  /usr/bin/kactivitymanagerd
+    Checking if anyone except bob can change /usr/bin/kactivitymanagerd
+------------------------
+PID:           3064
+Owner:         root
+Program path:  /usr/lib/udisks2/udisksd
+    Checking if anyone except root can change /usr/lib/udisks2/udisksd
+------------------------
+PID:           3069
+Owner:         bob
+Program path:  /usr/bin/kwrapper4
+    Checking if anyone except bob can change /usr/bin/kwrapper4
+------------------------
+PID:           3071
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3072
+Owner:         colord
+Program path:  /usr/libexec/colord
+    Checking if anyone except colord can change /usr/libexec/colord
+------------------------
+PID:           3093
+Owner:         bob
+Program path:  /usr/bin/kwin
+    Checking if anyone except bob can change /usr/bin/kwin
+------------------------
+PID:           31
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           3104
+Owner:         bob
+Program path:  /usr/bin/knotify4
+    Checking if anyone except bob can change /usr/bin/knotify4
+------------------------
+PID:           3107
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3111
+Owner:         bob
+Program path:  /usr/bin/pulseaudio
+    Checking if anyone except bob can change /usr/bin/pulseaudio
+------------------------
+PID:           3120
+Owner:         root
+Program path:  /usr/libexec/bluetooth/bluetoothd
+    Checking if anyone except root can change /usr/libexec/bluetooth/bluetoothd
+------------------------
+PID:           3146
+Owner:         bob
+Program path:  /usr/bin/ksysguardd
+    Checking if anyone except bob can change /usr/bin/ksysguardd
+------------------------
+PID:           3154
+Owner:         bob
+Program path:  /usr/bin/kuiserver
+    Checking if anyone except bob can change /usr/bin/kuiserver
+------------------------
+PID:           3162
+Owner:         bob
+Program path:  /usr/bin/akonadi_control
+    Checking if anyone except bob can change /usr/bin/akonadi_control
+------------------------
+PID:           3164
+Owner:         bob
+Program path:  /usr/bin/akonadiserver
+    Checking if anyone except bob can change /usr/bin/akonadiserver
+------------------------
+PID:           3167
+Owner:         bob
+Program path:  /usr/libexec/mysqld
+    Checking if anyone except bob can change /usr/libexec/mysqld
+------------------------
+PID:           3203
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3204
+Owner:         bob
+Program path:  /usr/bin/abrt-applet
+    Checking if anyone except bob can change /usr/bin/abrt-applet
+------------------------
+PID:           3264
+Owner:         bob
+Program path:  /usr/libexec/dconf-service
+    Checking if anyone except bob can change /usr/libexec/dconf-service
+------------------------
+PID:           3272
+Owner:         bob
+Program path:  /usr/libexec/kde4/polkit-kde-authentication-agent-1
+    Checking if anyone except bob can change /usr/libexec/kde4/polkit-kde-authentication-agent-1
+------------------------
+PID:           3273
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3306
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3308
+Owner:         bob
+Program path:  /usr/libexec/at-spi-bus-launcher
+    Checking if anyone except bob can change /usr/libexec/at-spi-bus-launcher
+------------------------
+PID:           3315
+Owner:         bob
+Program path:  /usr/bin/xsettings-kde
+    Checking if anyone except bob can change /usr/bin/xsettings-kde
+------------------------
+PID:           3319
+Owner:         bob
+Program path:  /usr/bin/dbus-daemon
+    Checking if anyone except bob can change /usr/bin/dbus-daemon
+------------------------
+PID:           3326
+Owner:         bob
+Program path:  /usr/libexec/at-spi2-registryd
+    Checking if anyone except bob can change /usr/libexec/at-spi2-registryd
+------------------------
+PID:           3334
+Owner:         bob
+Program path:  /usr/bin/akonadi_agent_launcher
+    Checking if anyone except bob can change /usr/bin/akonadi_agent_launcher
+------------------------
+PID:           3335
+Owner:         bob
+Program path:  /usr/bin/akonadi_agent_launcher
+    Checking if anyone except bob can change /usr/bin/akonadi_agent_launcher
+------------------------
+PID:           3336
+Owner:         bob
+Program path:  /usr/bin/akonadi_agent_launcher
+    Checking if anyone except bob can change /usr/bin/akonadi_agent_launcher
+------------------------
+PID:           3337
+Owner:         bob
+Program path:  /usr/bin/akonadi_agent_launcher
+    Checking if anyone except bob can change /usr/bin/akonadi_agent_launcher
+------------------------
+PID:           3338
+Owner:         bob
+Program path:  /usr/bin/akonadi_maildispatcher_agent
+    Checking if anyone except bob can change /usr/bin/akonadi_maildispatcher_agent
+------------------------
+PID:           3339
+Owner:         bob
+Program path:  /usr/bin/akonadi_nepomuk_feeder
+    Checking if anyone except bob can change /usr/bin/akonadi_nepomuk_feeder
+------------------------
+PID:           3366
+Owner:         bob
+Program path:  /usr/bin/kdeinit4
+    Checking if anyone except bob can change /usr/bin/kdeinit4
+------------------------
+PID:           3404
+Owner:         bob
+Program path:  /usr/bin/bash
+    Checking if anyone except bob can change /usr/bin/bash
+------------------------
+PID:           353
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           354
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           365
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           366
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           3710
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           379
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           380
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           381
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           382
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           383
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           384
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           385
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           3852
+Owner:         root
+Program path:  /usr/bin/su
+    Checking if anyone except root can change /usr/bin/su
+------------------------
+PID:           3855
+Owner:         root
+Program path:  /usr/bin/bash
+    Checking if anyone except root can change /usr/bin/bash
+------------------------
+PID:           39
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           41
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           42
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           4209
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           43
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           4384
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           4423
+Owner:         root
+Program path:  /usr/sbin/dhclient
+    Checking if anyone except root can change /usr/sbin/dhclient
+------------------------
+PID:           4448
+Owner:         postfix
+Program path:  /usr/libexec/postfix/pickup
+    Checking if anyone except postfix can change /usr/libexec/postfix/pickup
+------------------------
+PID:           4450
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           464
+Owner:         root
+Program path:  /usr/lib/systemd/systemd-journald
+    Checking if anyone except root can change /usr/lib/systemd/systemd-journald
+------------------------
+PID:           478
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           484
+Owner:         root
+Program path:  /usr/sbin/lvmetad
+    Checking if anyone except root can change /usr/sbin/lvmetad
+------------------------
+PID:           494
+Owner:         root
+Program path:  /usr/lib/systemd/systemd-udevd
+    Checking if anyone except root can change /usr/lib/systemd/systemd-udevd
+------------------------
+PID:           513
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           515
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           537
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           538
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           542
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           543
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           547
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           597
+Owner:         root
+Program path:  /usr/sbin/auditd
+    Checking if anyone except root can change /usr/sbin/auditd
+------------------------
+PID:           6
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           606
+Owner:         root
+Program path:  /usr/sbin/audispd
+    Checking if anyone except root can change /usr/sbin/audispd
+------------------------
+PID:           609
+Owner:         root
+Program path:  /usr/sbin/sedispatch
+    Checking if anyone except root can change /usr/sbin/sedispatch
+------------------------
+PID:           621
+Owner:         root
+Program path:  /usr/sbin/alsactl
+    Checking if anyone except root can change /usr/sbin/alsactl
+------------------------
+PID:           625
+Owner:         chrony
+Program path:  /usr/sbin/chronyd
+    Checking if anyone except chrony can change /usr/sbin/chronyd
+------------------------
+PID:           627
+Owner:         root
+Program path:  /usr/sbin/gssproxy
+    Checking if anyone except root can change /usr/sbin/gssproxy
+------------------------
+PID:           63
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           634
+Owner:         rtkit
+Program path:  /usr/libexec/rtkit-daemon
+    Checking if anyone except rtkit can change /usr/libexec/rtkit-daemon
+------------------------
+PID:           635
+Owner:         root
+Program path:  /usr/sbin/ModemManager
+    Checking if anyone except root can change /usr/sbin/ModemManager
+------------------------
+PID:           639
+Owner:         root
+Program path:  /usr/lib/systemd/systemd-logind
+    Checking if anyone except root can change /usr/lib/systemd/systemd-logind
+------------------------
+PID:           641
+Owner:         root
+Program path:  /usr/sbin/rsyslogd
+    Checking if anyone except root can change /usr/sbin/rsyslogd
+------------------------
+PID:           645
+Owner:         dbus
+Program path:  /usr/bin/dbus-daemon
+    Checking if anyone except dbus can change /usr/bin/dbus-daemon
+------------------------
+PID:           670
+Owner:         root
+Program path:  /usr/sbin/abrtd
+    Checking if anyone except root can change /usr/sbin/abrtd
+------------------------
+PID:           671
+Owner:         root
+Program path:  /usr/bin/abrt-watch-log
+    Checking if anyone except root can change /usr/bin/abrt-watch-log
+------------------------
+PID:           676
+Owner:         root
+Program path:  /usr/bin/abrt-watch-log
+    Checking if anyone except root can change /usr/bin/abrt-watch-log
+------------------------
+PID:           678
+Owner:         libstoragemgmt
+Program path:  /usr/bin/lsmd
+    Checking if anyone except libstoragemgmt can change /usr/bin/lsmd
+------------------------
+PID:           680
+Owner:         root
+Program path:  /usr/sbin/smartd
+    Checking if anyone except root can change /usr/sbin/smartd
+------------------------
+PID:           681
+Owner:         root
+Program path:  /usr/libexec/accounts-daemon
+    Checking if anyone except root can change /usr/libexec/accounts-daemon
+------------------------
+PID:           682
+Owner:         root
+Program path:  /usr/sbin/rngd
+    Checking if anyone except root can change /usr/sbin/rngd
+------------------------
+PID:           695
+Owner:         root
+Program path:  /usr/bin/python2.7
+    Checking if anyone except root can change /usr/bin/python2.7
+------------------------
+PID:           699
+Owner:         kibana
+Program path:  /opt/kibana/node/bin/node
+    Checking if anyone except kibana can change /opt/kibana/node/bin/node
+WARNING: /opt/kibana/node/bin/node is currently running as kibana. The group root can write to /opt/kibana/node/bin/node
+------------------------
+PID:           7
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           715
+Owner:         polkitd
+Program path:  /usr/lib/polkit-1/polkitd
+    Checking if anyone except polkitd can change /usr/lib/polkit-1/polkitd
+------------------------
+PID:           752
+Owner:         root
+Program path:  /opt/VBoxGuestAdditions-5.0.14/sbin/VBoxService
+    Checking if anyone except root can change /opt/VBoxGuestAdditions-5.0.14/sbin/VBoxService
+------------------------
+PID:           8
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           810
+Owner:         root
+Program path:  /usr/sbin/NetworkManager
+    Checking if anyone except root can change /usr/sbin/NetworkManager
+------------------------
+PID:           830
+Owner:         root
+Program path:  /usr/sbin/wpa_supplicant
+    Checking if anyone except root can change /usr/sbin/wpa_supplicant
+------------------------
+PID:           9
+ERROR: Can't find full path of running program: 
+Owner:         root
+------------------------
+PID:           94
+ERROR: Can't find full path of running program: 
+Owner:         root
